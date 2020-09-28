@@ -232,7 +232,7 @@ func main() {
 	if invalid == 0 {
 		fmt.Printf("verified all %v blobs\n", valid)
 	} else {
-		fmt.Println()
+		fmt.Printf("CORRUPTION DETECTED: %v of %v blobs failed validation. Their refs are listed above.\n", invalid, valid+invalid)
 	}
 
 	// Final error handling: check if there were any failures in the
@@ -240,6 +240,10 @@ func main() {
 	if err := wg.Err(); err != nil {
 		stderrf("pk-verify: error while streaming blobs: %v\n", err)
 		os.Exit(1)
+	}
+
+	if invalid > 0 {
+		os.Exit(2)
 	}
 }
 
