@@ -1,4 +1,4 @@
-module pk-verify
+module github.com/jeremyschlatter/pk-verify
 
 go 1.15
 
